@@ -7,8 +7,6 @@ from flask import Flask, request
 app = Flask(__name__)
 app.json.compact = False
 
-db.init_app(app)
-
 # ROUTES #
 
 @app.get('/')
