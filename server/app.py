@@ -43,6 +43,7 @@ def math(numberone, numbertwo):
 @app.get('/dadjoke')
 def get_joke():
     url = "https://icanhazdadjoke.com/"
+    # difference between using requests.get from importing requests vs request from Flask?
     response = requests.get(url, headers={"Accept": "application/json"})
     # why can't I do jsonify(response), 200
     return response.json(), 200
@@ -58,6 +59,26 @@ def get_joke():
 # The flow of this should look like so:
 
 # POSTMAN/CURL --> FLASK --> icanhazdadjoke.com --> FLASK --> POSTMAN/CURL
+
+@app.get('/primes/<int:number>')
+def get_primes(number):
+    # create a list of numbers counting from 0 to number
+    numbers = [n + 1 for n in range(number)]
+    # if n%3 == 0:
+        # [n for n in ]
+    return numbers
+
+# This route responds with a list of prime numbers between 0 and the number sent as a parameter. The number must be between an integer between 1 and 100 inclusive.
+
+# If an invalid number is given, instead send an error message formatted like so:
+
+# { "error": "Number must be an integer between 0 and 100" }
+
+# There are multiple ways of finding the prime numbers but bonus points to those who attempt to find them algorithmically. A prime is any number that's only divisible by itself and 1.
+
+@app.post('/todo/<path:item>')
+def add_todo(item):
+    return jsonify({"hello world"}), 201
 
 
 # RUN #
