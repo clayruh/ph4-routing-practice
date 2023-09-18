@@ -43,7 +43,7 @@ def math(numberone, numbertwo):
 @app.get('/dadjoke')
 def get_joke():
     url = "https://icanhazdadjoke.com/"
-    # difference between using requests.get from importing requests vs request from Flask?
+    # requests.get is imported from Python3 and is an outgoing get call whereas Flask request is an incoming request
     response = requests.get(url, headers={"Accept": "application/json"})
     # why can't I do jsonify(response), 200
     return response.json(), 200
@@ -75,10 +75,13 @@ def get_primes(number):
 
 @app.post('/todo/<path:item>')
 def add_todo(item):
-    data = request.json
+    # data = request.json
+    file = open("TODO.txt", "a")
+    # file.write(f"- {data['to-do']} \n")
+    file.write(f"- {item} \n")
+    file.close()
 
-    return jsonify({"hello world"}), 201
-
+    return jsonify(item), 201
 
 # RUN #
 
