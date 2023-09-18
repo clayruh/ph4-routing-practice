@@ -62,22 +62,21 @@ def get_joke():
 
 @app.get('/primes/<int:number>')
 def get_primes(number):
-    # create a list of numbers counting from 0 to number
-    numbers = [n + 1 for n in range(number)]
-    # if n%3 == 0:
-        # [n for n in ]
-    return numbers
+    if 1 <= number <= 100:
+        numbers = [n + 1 for n in range(number) if n%3 == 1]
+    # prime numbers are only divisible by itself and 1
+        return numbers
+    else: 
+        return jsonify({"error": "Number must be an integer between 1 and 100"})
 
 # This route responds with a list of prime numbers between 0 and the number sent as a parameter. The number must be between an integer between 1 and 100 inclusive.
-
-# If an invalid number is given, instead send an error message formatted like so:
-
-# { "error": "Number must be an integer between 0 and 100" }
 
 # There are multiple ways of finding the prime numbers but bonus points to those who attempt to find them algorithmically. A prime is any number that's only divisible by itself and 1.
 
 @app.post('/todo/<path:item>')
 def add_todo(item):
+    data = request.json
+
     return jsonify({"hello world"}), 201
 
 
